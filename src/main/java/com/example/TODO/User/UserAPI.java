@@ -1,5 +1,6 @@
 package com.example.TODO.User;
 
+import com.example.TODO.Commands.AssignTaskToUserCommand;
 import com.example.TODO.Commands.CreateUserCommand;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -35,7 +36,7 @@ public class UserAPI {
         return result;
     }
 
-    @GetMapping("show")
+    @GetMapping("/show")
     public Response showAll() throws Exception{
         Response result;
         try{
@@ -48,5 +49,17 @@ public class UserAPI {
         return result;
     }
 
+    @PostMapping("/assign")
+    public Response assignTask(@Valid @RequestBody AssignTaskToUserCommand assign) throws Exception{
+        Response result;
+        try{
+            userService.assignTaskToUser(assign);
+            result = Response.status(Response.Status.OK).build();
+        }
+        catch (Exception ex){
+            throw  new Exception(ex.getMessage());
+        }
+        return result;
+    }
 
 }

@@ -1,15 +1,14 @@
 package com.example.TODO.User;
 
+import com.example.TODO.Todo.Todo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 @Entity
 @Data
@@ -28,4 +27,7 @@ public class User {
     @NotNull
     private String lastName;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private Set<Todo> tasks;
 }
