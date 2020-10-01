@@ -1,5 +1,6 @@
 package com.example.TODO.User;
 
+import com.example.TODO.Comment.Comment;
 import com.example.TODO.Todo.Todo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,4 +31,7 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private Set<Todo> tasks;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private Set<Comment> comments;
 }

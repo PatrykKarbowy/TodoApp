@@ -1,6 +1,6 @@
 package com.example.TODO.Todo;
 
-import com.example.TODO.User.User;
+import com.example.TODO.Comment.Comment;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 @Entity
 @Data
@@ -24,6 +25,10 @@ public class Todo {
     @NotNull
     private String description;
     private boolean completed;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "task_id", referencedColumnName = "id")
+    private Set<Comment> comments;
 
 
 }
